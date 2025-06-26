@@ -1,0 +1,23 @@
+{
+  "name": "food-ordering-app---react",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "build": "^0.1.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.27.1",
+    "@parcel/transformer-babel": "^2.15.4",
+    "parcel": "^2.15.4"
+  },
+  "main": "index.js",
+  "description": ""
+}
