@@ -11,13 +11,13 @@
   "dependencies": {
     "build": "^0.1.4",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.27.1",
     "@parcel/transformer-babel": "^2.15.4",
     "parcel": "^2.15.4"
   },
-  "main": "index.js",
   "description": ""
 }
