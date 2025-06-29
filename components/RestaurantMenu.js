@@ -1,42 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Shimmer from "./Shimmer"; // Create a shimmer loading component
-import Error from "./Error"; // Create an error component
+import useRestaurantMenu from "../customHooks/useRestaurantMenu.js";
 
 const RestaurantMenu = () => {
-  const [resData, setResData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const { resId } = useParams();
 
-  const fetchMenuAPI = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.7195687&lng=75.8577258&restaurantId=${resId}&submitAction=ENTER`
-      );
+  const resData = useRestaurantMenu(resId);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const json = await response.json();
-      setResData(json);
-      console.log(json);
-    } catch (err) {
-      setError(err.message);
-      console.error("Failed to fetch menu:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchMenuAPI();
-  }, [resId]); // Added resId to dependency array
-
-  if (loading) return <Shimmer />;
-  if (error) return <Error message={error} />;
   if (!resData) return null;
 
   // Safely access nested properties with optional chaining
@@ -67,7 +36,7 @@ const RestaurantMenu = () => {
         <div className="restaurant-details">
           <p className="cuisines">{cuisines.join(", ")}</p>
           <p className="location">{locality || areaName}</p>
-          <p className="cost">{costForTwo}</p>
+          <p className="cost">₹{costForTwo / 200}</p>
           <p className="delivery-time">Delivery in {sla?.deliveryTime} mins</p>
         </div>
       </div>

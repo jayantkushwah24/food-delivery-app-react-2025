@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { RestaurantCard } from "./RestaurantCard";
+import useOnlineStatus from "../customHooks/useOnlineStatus";
 
 export const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -13,18 +14,25 @@ export const Body = () => {
   };
 
   const fetchSwiggyAPI = async () => {
-    const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.7195687&lng=75.8577258&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await response.json();
+    try {
+      const response = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.7195687&lng=75.8577258&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
+      const json = await response.json();
 
-    setListOfRestaurant(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    setFilteredRestaurant(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+      const restaurantList =
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants || [];
+
+      setListOfRestaurant(restaurantList);
+      setFilteredRestaurant(restaurantList);
+    } catch (error) {
+      console.error("Failed to fetch menu:", err);
+    }
   };
 
   const onChangeHandler = (e) => {
