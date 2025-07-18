@@ -24,3 +24,5 @@ const useRestaurantMenu = (resId) => {
 };
 
 export default useRestaurantMenu;
+
+// https://thingproxy.freeboard.io/fetch/

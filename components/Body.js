@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-
-import { RestaurantCard } from "./RestaurantCard";
-import useOnlineStatus from "../customHooks/useOnlineStatus";
+import { RestaurantCard, WithPromotedLabel } from "./RestaurantCard";
 
 export const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [isTopRatedFilter, setIsTopRatedFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
+
+  const RestaurantCardPromoted = WithPromotedLabel(RestaurantCard);
 
   const toggleTopRated = () => {
     setIsTopRatedFilter(!isTopRatedFilter);
@@ -31,7 +31,7 @@ export const Body = () => {
       setListOfRestaurant(restaurantList);
       setFilteredRestaurant(restaurantList);
     } catch (error) {
-      console.error("Failed to fetch menu:", err);
+      console.error("Failed to fetch menu:" + error);
     }
   };
 
@@ -52,7 +52,7 @@ export const Body = () => {
   useEffect(() => {
     if (isTopRatedFilter) {
       const topRatedRestaurant = listOfRestaurant.filter(
-        (res) => res.info.avgRating > 4.5
+        (res) => res.info.avgRating > 4.2
       );
       setFilteredRestaurant(topRatedRestaurant);
     } else {
@@ -79,18 +79,12 @@ export const Body = () => {
         </button>
       </div>
       <div className="restaurant-container">
-        {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant.info.id}
-            resId={restaurant.info.id}
-            cloudinaryImageId={restaurant.info.cloudinaryImageId}
-            name={restaurant.info.name}
-            cuisine={restaurant.info.cuisines}
-            rating={restaurant.info.avgRatingString}
-            deliveryTime={restaurant.info?.sla?.slaString}
-          />
+        {filteredRestaurant.map((restaurant, index) => (
+          <RestaurantCard key={index} resData={restaurant} />
         ))}
       </div>
     </main>
   );
 };
+
+// https://thingproxy.freeboard.io/fetch/
