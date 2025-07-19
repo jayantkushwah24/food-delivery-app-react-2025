@@ -4,7 +4,9 @@ import { Header } from "./Header";
 const Contact = () => {
   return (
     <>
-      <div>Contact</div>
+      <div>
+        <h1>EmailId : jayantkushwah8@gmail.com</h1>
+      </div>
     </>
   );
 };

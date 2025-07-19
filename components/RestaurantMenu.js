@@ -1,8 +1,16 @@
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../customHooks/useRestaurantMenu.js";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice.js";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    // dispatch an action
+    dispatch(addItem(item));
+  };
 
   const resData = useRestaurantMenu(resId);
 
@@ -45,17 +53,30 @@ const RestaurantMenu = () => {
         <h2 className="menu-title">Menu</h2>
         <div className="menu-items">
           {menuItems.length > 0 ? (
-            menuItems.map((item) => (
-              <div key={item.card.info.id} className="menu-item">
-                <h3>{item.card.info.name}</h3>
-                <p>{item.card.info.description}</p>
-                <p>
-                  ₹
-                  {item.card.info.price / 100 ||
-                    item.card.info.defaultPrice / 100}
-                </p>
-              </div>
-            ))
+            menuItems.map((item) => {
+              const { id, imageId, name, description, price, defaultPrice } =
+                item.card.info;
+              return (
+                <div key={id} className="menu-item">
+                  <img
+                    src={`https://media-assets.swiggy.com/${imageId}`}
+                    alt={name}
+                    className="cart-item-img"
+                  />
+                  <h3 className="item-name">{name}</h3>
+                  <p className="item-description">{description}</p>
+                  <p className="item-price">
+                    ₹{price / 100 || defaultPrice / 100}
+                  </p>
+                  <button
+                    className="add-to-cart-btn"
+                    onClick={() => handleAddItem(item)}
+                  >
+                    Add +
+                  </button>
+                </div>
+              );
+            })
           ) : (
             <p className="no-items">No menu items available</p>
           )}
