@@ -16,7 +16,7 @@ const Cart = () => {
       <div className="cart-container">
         {cartItems.length > 0 ? (
           cartItems.map((item) => {
-            const { name, defaultPrice, imageId, id } = item;
+            const { name, defaultPrice, imageId, id, price } = item;
             return (
               <div key={id} className="cart-item">
                 <img
@@ -26,7 +26,7 @@ const Cart = () => {
                 />
                 <div className="cart-item-details">
                   <h3>{name}</h3>
-                  <p>₹{defaultPrice / 100}</p>
+                  <p>₹{price ? price / 100 : defaultPrice / 100}</p>
                 </div>
               </div>
             );
