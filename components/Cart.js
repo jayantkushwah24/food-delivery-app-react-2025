@@ -16,7 +16,7 @@ const Cart = () => {
       <div className="cart-container">
         {cartItems.length > 0 ? (
           cartItems.map((item) => {
-            const { name, defaultPrice, imageId, id } = item.card.info;
+            const { name, defaultPrice, imageId, id } = item;
             return (
               <div key={id} className="cart-item">
                 <img
@@ -34,9 +34,11 @@ const Cart = () => {
         ) : (
           <div className="empty-cart">No items in the cart</div>
         )}
-        {cartItems.length > 0 && <button id="clear-cart" onClick={handleClearCart}>
-          Clear Cart
-        </button>}
+        {cartItems.length > 0 && (
+          <button id="clear-cart" onClick={handleClearCart}>
+            Clear Cart
+          </button>
+        )}
       </div>
     </div>
   );

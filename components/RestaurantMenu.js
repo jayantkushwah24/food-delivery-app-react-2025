@@ -1,16 +1,9 @@
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../customHooks/useRestaurantMenu.js";
-import { useDispatch } from "react-redux";
-import { addItem } from "../utils/cartSlice.js";
+import MenuListCard from "./MenuListCard.js";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  const dispatch = useDispatch();
-
-  const handleAddItem = (item) => {
-    // dispatch an action
-    dispatch(addItem(item));
-  };
 
   const resData = useRestaurantMenu(resId);
 
@@ -18,9 +11,6 @@ const RestaurantMenu = () => {
 
   // Safely access nested properties with optional chaining
   const restaurantInfo = resData?.data?.cards[2]?.card?.card?.info || {};
-  const menuItems =
-    resData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
-      ?.card?.itemCards || [];
 
   const {
     name = "Restaurant",
@@ -49,39 +39,7 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-      <div className="menu-section">
-        <h2 className="menu-title">Menu</h2>
-        <div className="menu-items">
-          {menuItems.length > 0 ? (
-            menuItems.map((item) => {
-              const { id, imageId, name, description, price, defaultPrice } =
-                item.card.info;
-              return (
-                <div key={id} className="menu-item">
-                  <img
-                    src={`https://media-assets.swiggy.com/${imageId}`}
-                    alt={name}
-                    className="cart-item-img"
-                  />
-                  <h3 className="item-name">{name}</h3>
-                  <p className="item-description">{description}</p>
-                  <p className="item-price">
-                    ₹{price / 100 || defaultPrice / 100}
-                  </p>
-                  <button
-                    className="add-to-cart-btn"
-                    onClick={() => handleAddItem(item)}
-                  >
-                    Add +
-                  </button>
-                </div>
-              );
-            })
-          ) : (
-            <p className="no-items">No menu items available</p>
-          )}
-        </div>
-      </div>
+      <MenuListCard resData={resData} />
     </div>
   );
 };

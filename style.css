@@ -440,3 +440,145 @@ body {
 #clear-cart:active {
   transform: scale(0.98);
 }
+
+/* MenuListCard.css */
+
+.menu-list {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.menu-category {
+  margin-bottom: 3rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.menu-category h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #2d3436;
+  border-bottom: 2px solid #dfe6e9;
+  padding-bottom: 0.5rem;
+}
+
+.menu-subcategory {
+  margin-top: 2rem;
+}
+
+.menu-subcategory h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #636e72;
+}
+
+.menu-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.menu-item {
+  display: flex;
+  gap: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+.menu-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item-img {
+  width: 120px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.menu-item-details {
+  flex: 1;
+}
+
+.menu-item-details h5 {
+  font-size: 1rem;
+  margin: 0;
+  color: #2d3436;
+}
+
+.menu-item-details p {
+  font-size: 0.9rem;
+  color: #636e72;
+  margin: 0.25rem 0;
+}
+
+.menu-item-details .price {
+  font-weight: bold;
+  color: #00b894;
+}
+
+button {
+  background-color: #0984e3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #74b9ff;
+}
+
+.veg-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.veg {
+  background-color: green;
+  border: 2px solid darkgreen;
+}
+
+.non-veg {
+  background-color: red;
+  border: 2px solid darkred;
+}
+.menu-list {
+  width: 100%;
+}
+
+.menu-section {
+  border-bottom: 1px solid #ccc;
+}
+
+.menu-header:hover {
+  background-color: #e0e0e0;
+}
+
+.menu-item img {
+  margin-top: 5px;
+}
+.menu-title {
+  user-select: none;
+  transition: all 0.2s;
+}
+.menu-title:hover {
+  color: #f97316; /* orange-500 */
+}
